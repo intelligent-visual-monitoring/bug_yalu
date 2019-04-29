@@ -1,0 +1,23 @@
+#include <opencv2\opencv.hpp>
+#include <iostream>
+using namespace std;
+using namespace cv;
+int main() {
+	//用void glob(String pattern, std::vector<String>& result, bool recursive = false);当recursive为false时，仅仅遍历指定文件夹内符合模式的文件，当recursive为true时，会同时遍历指定文件夹的子文件夹
+	//pattern要绝对路径 其它测试有问题
+	string pattern = "F:\\ZK\\test\\*.bmp";
+	cout << pattern << endl;
+	vector<Mat> images;
+	// 必须cv的String
+	vector<String> fn;
+	glob(pattern, fn, false);
+	int count = fn.size();
+	cout << count << endl;
+	for (int i = 0; i < count; i++) {
+		images.push_back(imread(fn[i]));
+		imshow("jaj", images[i]);
+		waitKey(100);
+	}
+	system("pause");
+	return 1;
+}
